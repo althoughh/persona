@@ -10,12 +10,12 @@ def run():
     role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 
     # Sidebar Dropdown for Industry selection
-    selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry_Column_Name'].unique())
+    selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry'].unique())
 
     # Filter roles and jtbd based on the selected industry
     # Assuming 'Industry_Column_Name' in role_df and jtbd_df links to the industry
-    filtered_role = role_df[role_df['Industry_Column_Name'] == selected_industry]
-    filtered_jtbd = jtbd_df[jtbd_df['Industry_Column_Name'] == selected_industry]
+    filtered_role = role_df[role_df['Industry'] == selected_industry]
+    filtered_jtbd = jtbd_df[jtbd_df['Industry'] == selected_industry]
 
     # Sidebar Dropdown for Role selection based on Industry
     selected_role = st.sidebar.selectbox("Select a Role", options=filtered_role['Role'].unique())
