@@ -31,19 +31,9 @@ def run():
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+This is a cool tool        Machine Learning and Data Science projects.
+        **👈 Select a role, or job to be done f
+     
     """
     )
 
@@ -71,9 +61,24 @@ if not role_info.empty:
 else:
     st.write("No additional information available for this role.")
 
-# Display the job information
-for column in job_info.columns:
-    st.write(f"**{column}:** {job_info.iloc[0][column]}")
+# Check if a role is selected before displaying JTBD options
+if selected_role:
+    # Filter the jtbd_df based on the selected role
+    filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
+
+    # Dropdown for Job to be Done selection
+    selected_job = st.selectbox("Select a Job to be Done", options=[''] + list(filtered_jtbd['Job Name'].unique()))
+
+    # Display JTBD information only if a job is selected
+    if selected_job:
+        # Filter the data based on the selected job
+        job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
+
+        # Display the job information
+        for column in job_info.columns:
+            st.write(f"**{column}:** {job_info.iloc[0][column]}")
+else:
+    st.write("Please select a role to see the Jobs to be Done.")
 
 if __name__ == "__main__":
     run()
