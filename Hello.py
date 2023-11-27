@@ -11,16 +11,15 @@ def run():
 
     # Sidebar Dropdown for Industry selection
     selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry'].unique())
- # Display industry information in separate boxes
     industry_info = industry_df[industry_df['Industry'] == selected_industry]
-   if not industry_info.empty:
+    if not industry_info.empty:
         for column in industry_info.columns:
             with st.container():
                 st.markdown(f"**{column}**")
                 st.text_area("", industry_info.iloc[0][column], height=100, key=f"industry_{column}")
 
     # Filter roles and jtbd based on the selected industry
-    filtered_role = role_df[role_df['Industry'] == selected_industry]
+    filtered_role = role_df[role_df['industry'] == selected_industry]
 
     # Sidebar Dropdown for Role selection based on Industry
     selected_role = st.sidebar.selectbox("Select a Role", options=[''] + list(filtered_role['Role'].unique()))
