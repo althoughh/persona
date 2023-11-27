@@ -58,6 +58,12 @@ selected_role = st.selectbox("Select a Role", options=role_df['Role'].unique())
 filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
 # Dropdown for Job to be Done selection
 selected_job = st.selectbox("Select a Job to be Done", options=filtered_jtbd['Job Name'].unique())
+# Filter the data based on the selected job
+job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
+
+# Display the job information
+for column in job_info.columns:
+    st.write(f"**{column}:** {job_info.iloc[0][column]}")
 
 if __name__ == "__main__":
     run()
