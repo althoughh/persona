@@ -11,41 +11,40 @@ def run():
 
     # Sidebar Dropdown for Industry selection
     selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry'].unique())
-
-    # Display industry information
+ # Display industry information in separate boxes
     industry_info = industry_df[industry_df['Industry'] == selected_industry]
     if not industry_info.empty:
-        st.subheader(f"Information for Industry: {selected_industry}")
         for column in industry_info.columns:
-            st.write(f"**{column}:** {industry_info.iloc[0][column]}")
-    else:
-        st.write("No additional information available for this industry.")
+            with st.container():
+                st.subheader(column)
+                st.text(industry_info.iloc[0][column])
 
     # Filter roles and jtbd based on the selected industry
-    filtered_role = role_df[role_df['Industry'] == selected_industry]
-    filtered_jtbd = jtbd_df[jtbd_df['Industry'] == selected_industry]
+    filtered_role = role_df[role_df['industry'] == selected_industry]
 
     # Sidebar Dropdown for Role selection based on Industry
-    if selected_industry:
-        selected_role = st.sidebar.selectbox("Select a Role", options=[''] + list(filtered_role['Role'].unique()))
+    selected_role = st.sidebar.selectbox("Select a Role", options=[''] + list(filtered_role['Role'].unique()))
 
-        # Display role information
-        if selected_role:
-            role_info = filtered_role[filtered_role['Role'] == selected_role]
-            if not role_info.empty:
-                st.subheader(f"Information for Role: {selected_role}")
-                for column in role_info.columns:
-                    st.write(f"**{column}:** {role_info.iloc[0][column]}")
-            
-            # Sidebar Dropdown for Job to be Done selection based on Role
-            filtered_jtbd = filtered_jtbd[filtered_jtbd['Mapped Role'] == selected_role]
-            selected_job = st.sidebar.selectbox("Select a Job to be Done", options=[''] + list(filtered_jtbd['Job Name'].unique()))
+    # Display role information in separate boxes
+    if selected_role:
+        role_info = filtered_role[filtered_role['Role'] == selected_role]
+        if not role_info.empty:
+            for column in role_info.columns:
+                with st.container():
+                    st.subheader(column)
+                    st.text(role_info.iloc[0][column])
 
-            # Display JTBD information only if a job is selected
-            if selected_job:
-                job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
-                for column in job_info.columns:
-                    st.write(f"**{column}:** {job_info.iloc[0][column]}")
+        # Filtered JTBD based on the selected role
+        filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
+        selected_job = st.sidebar.selectbox("Select a Job to be Done", options=[''] + list(filtered_jtbd['Job Name'].unique()))
+
+        # Display JTBD information in separate boxes if a job is selected
+        if selected_job:
+            job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
+            for column in job_info.columns:
+                with st.container():
+                    st.subheader(column)
+                    st.text(job_info.iloc[0][column])
 
 if __name__ == "__main__":
     run()
