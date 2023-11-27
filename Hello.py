@@ -21,13 +21,13 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Zinc Persona Generator",
         page_icon="👋",
     )
 
-    st.write("# Welcome to Streamlit! 👋")
+    st.write("# Persona maker 👋")
 
-    st.sidebar.success("Select a demo above.")
+    st.sidebar.success("Select some options.")
 
     st.markdown(
         """
@@ -51,6 +51,18 @@ def run():
 industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20industry.csv')
 jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
+selected_role = st.selectbox("Select a Role", options=role_df['Role'].unique())
+# Filter the jtbd_df based on selected role
+filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
+
+# Create a dropdown for selecting a Job to be Done
+selected_job = st.selectbox("Select a Job to be Done", options=filtered_jtbd['Job Name'].unique())
+# Filter the data based on the selected job
+job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
+
+# Display the information in a visually appealing format
+for column in job_info.columns:
+    st.write(f"**{column}:** {job_info.iloc[0][column]}")
 
 
 if __name__ == "__main__":
