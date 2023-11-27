@@ -1,5 +1,10 @@
 import streamlit as st
 import pandas as pd
+pip install st-card-component
+from st_card_component import st_card
+
+# Example usage
+st_card(title="Card Title", text="This
 
 def run():
     st.sidebar.success("Select some options.")
