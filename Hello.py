@@ -5,15 +5,15 @@ def run():
     st.sidebar.success("Select some options.")
 
     # Load the CSV files
-    industry_df = pd.read_csv('path/to/industry.csv')
-    jtbd_df = pd.read_csv('path/to/jtbd.csv')
-    role_df = pd.read_csv('path/to/role.csv')
+    industry_df = pd.read_csv('industry.csv')
+    jtbd_df = pd.read_csv('jtbd.csv')
+    role_df = pd.read_csv('role.csv')
 
     # Sidebar Dropdown for Industry selection
-    selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry_Column_Name'].unique())
+    selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry'].unique())
 
     # Display industry information
-    industry_info = industry_df[industry_df['Industry_Column_Name'] == selected_industry]
+    industry_info = industry_df[industry_df['Industry'] == selected_industry]
     if not industry_info.empty:
         st.subheader(f"Information for Industry: {selected_industry}")
         for column in industry_info.columns:
@@ -22,8 +22,8 @@ def run():
         st.write("No additional information available for this industry.")
 
     # Filter roles and jtbd based on the selected industry
-    filtered_role = role_df[role_df['industry'] == selected_industry]
-    filtered_jtbd = jtbd_df[jtbd_df['industry'] == selected_industry]
+    filtered_role = role_df[role_df['Industry'] == selected_industry]
+    filtered_jtbd = jtbd_df[jtbd_df['Industry'] == selected_industry]
 
     # Sidebar Dropdown for Role selection based on Industry
     if selected_industry:
