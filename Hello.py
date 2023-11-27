@@ -50,7 +50,7 @@ def run():
 # Example for reading a CSV file
 industry_df = pd.read_csv('path_or_url_to_industry_csv')
 jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
-role_df = pd.read_csv('path_or_url_to_role_csv')
+role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 
 
 if __name__ == "__main__":
