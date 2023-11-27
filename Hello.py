@@ -18,7 +18,7 @@ def run():
     # Reading CSV files
     industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20industry%20(1).csv')
     jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20jtbd.csv')
-    role_df = pd.read_csv('https://raw.githubusercontent.com/.../role.csv')
+    role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 
     # Sidebar Dropdown for Role selection
     selected_role = st.sidebar.selectbox("Select a Role", options=role_df['Role'].unique())
