@@ -1,8 +1,5 @@
 import streamlit as st
-from streamlit.logger import get_logger
 import pandas as pd
-
-LOGGER = get_logger(__name__)
 
 # Set the page config at the very start
 st.set_page_config(
@@ -23,8 +20,8 @@ def run():
     jtbd_df = pd.read_csv('https://raw.githubusercontent.com/.../jtbd.csv')
     role_df = pd.read_csv('https://raw.githubusercontent.com/.../role.csv')
 
-    # Dropdown for Role selection
-    selected_role = st.selectbox("Select a Role", options=role_df['Role'].unique())
+    # Sidebar Dropdown for Role selection
+    selected_role = st.sidebar.selectbox("Select a Role", options=role_df['Role'].unique())
 
     # Display role information
     role_info = role_df[role_df['Role'] == selected_role]
@@ -33,10 +30,10 @@ def run():
         for column in role_info.columns:
             st.write(f"**{column}:** {role_info.iloc[0][column]}")
 
-    # Dropdown for Job to be Done selection, shown only if a role is selected
+    # Sidebar Dropdown for Job to be Done selection, shown only if a role is selected
     if selected_role:
         filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
-        selected_job = st.selectbox("Select a Job to be Done", options=[''] + list(filtered_jtbd['Job Name'].unique()))
+        selected_job = st.sidebar.selectbox("Select a Job to be Done", options=[''] + list(filtered_jtbd['Job Name'].unique()))
 
         # Display JTBD information only if a job is selected
         if selected_job:
