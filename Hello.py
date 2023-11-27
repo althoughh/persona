@@ -5,9 +5,9 @@ def run():
     st.sidebar.success("Select some options.")
 
     # Load the CSV files
-    industry_df = pd.read_csv('https://raw.githubusercontent.com/.../industry.csv')
-    jtbd_df = pd.read_csv('https://raw.githubusercontent.com/.../jtbd.csv')
-    role_df = pd.read_csv('https://raw.githubusercontent.com/.../role.csv')
+    industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20industry%20(1).csv')
+    jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20jtbd.csv')
+    role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 
     # Sidebar Dropdown for Industry selection
     selected_industry = st.sidebar.selectbox("Select an Industry", options=industry_df['Industry_Column_Name'].unique())
