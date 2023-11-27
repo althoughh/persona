@@ -60,7 +60,16 @@ filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
 selected_job = st.selectbox("Select a Job to be Done", options=filtered_jtbd['Job Name'].unique())
 # Filter the data based on the selected job
 job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
-print(jtbd_df.columns)
+# Get the data for the selected role
+role_info = role_df[role_df['Role'] == selected_role]
+
+# Display the role information
+if not role_info.empty:
+    st.subheader(f"Information for Role: {selected_role}")
+    for column in role_info.columns:
+        st.write(f"**{column}:** {role_info.iloc[0][column]}")
+else:
+    st.write("No additional information available for this role.")
 
 # Display the job information
 for column in job_info.columns:
