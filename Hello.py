@@ -5,7 +5,7 @@ def run():
     st.sidebar.success("Select some options.")
 
     # Load the CSV files
-    industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/industry).csv')
+    industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/industry.csv')
     jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/jtbd.csv')
     role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/role.csv')
 
