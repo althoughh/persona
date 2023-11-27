@@ -19,7 +19,7 @@ def run():
                 st.text_area("", industry_info.iloc[0][column], height=100, key=f"industry_{column}")
 
     # Filter roles and jtbd based on the selected industry
-    filtered_role = role_df[role_df['industry'] == selected_industry]
+    filtered_role = role_df[role_df['Industry'] == selected_industry]
 
     # Sidebar Dropdown for Role selection based on Industry
     selected_role = st.sidebar.selectbox("Select a Role", options=[''] + list(filtered_role['Role'].unique()))
