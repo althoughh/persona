@@ -16,7 +16,7 @@ def run():
     """)
 
     # Reading CSV files
-    industry_df = pd.read_csv('https://raw.githubusercontent.com/.../industry.csv')
+    industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20industry%20(1).csv')
     jtbd_df = pd.read_csv('https://raw.githubusercontent.com/.../jtbd.csv')
     role_df = pd.read_csv('https://raw.githubusercontent.com/.../role.csv')
 
