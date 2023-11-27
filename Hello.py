@@ -14,6 +14,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
+import pandas as pd
 
 LOGGER = get_logger(__name__)
 
@@ -45,6 +46,11 @@ def run():
         - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
     """
     )
+
+# Example for reading a CSV file
+industry_df = pd.read_csv('path_or_url_to_industry_csv')
+jtbd_df = pd.read_csv('path_or_url_to_jtbd_csv')
+role_df = pd.read_csv('path_or_url_to_role_csv')
 
 
 if __name__ == "__main__":
