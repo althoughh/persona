@@ -51,26 +51,13 @@ def run():
 industry_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20industry.csv')
 jtbd_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
 role_df = pd.read_csv('https://raw.githubusercontent.com/althoughh/persona/main/Untitled%20spreadsheet%20-%20role.csv')
+
+# Dropdown for Role selection
 selected_role = st.selectbox("Select a Role", options=role_df['Role'].unique())
-# Filter the jtbd_df based on selected role
+# Filter the jtbd_df based on the selected role
 filtered_jtbd = jtbd_df[jtbd_df['Mapped Role'] == selected_role]
-selected_industry = st.selectbox("Select an Industry", options=industry_df['Your_Industry_Column_Name'].unique())
-
-# Create a dropdown for selecting a Job to be Done
+# Dropdown for Job to be Done selection
 selected_job = st.selectbox("Select a Job to be Done", options=filtered_jtbd['Job Name'].unique())
-# Filter the data based on the selected job
-job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
-
-# Display the information in a visually appealing format
-for column in job_info.columns:
-    st.write(f"**{column}:** {job_info.iloc[0][column]}")
-
-# Assuming the information to display is based on the selected job
-job_info = filtered_jtbd[filtered_jtbd['Job Name'] == selected_job]
-
-# Display the job information
-for column in job_info.columns:
-    st.write(f"**{column}:** {job_info.iloc[0][column]}")
 
 if __name__ == "__main__":
     run()
