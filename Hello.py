@@ -58,15 +58,6 @@ def display_info_with_cards(df, section):
 
 
 def get_bootstrap_card_html(title, content, section):
-    if section == "industry":
-        # Customize for industry
-        card_color = "primary"
-    elif section == "role":
-        # Customize for role
-        card_color = "success"
-    else:
-        # Customize for job
-        card_color = "warning"
 
     return f"""
         <div class="card border-{card_color} mb-3" style="max-width: 18rem;">
