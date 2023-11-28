@@ -26,6 +26,26 @@ def run():
         display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
     if selected_job:
         display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
+ group_headings = {
+    "industry": {
+        "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
+        "What Do They Need": ["Industry-Specific Needs", "Key Drivers for Background Checks", "Challenges and Concerns"],
+        "How Do They Choose": ["Preferred Features in a Solution", "Decision Influencers"],
+        "How Can We Serve Them": ["Common Roles Involved in Hiring Process", "Messaging and Communication"]
+    },
+    "role": {
+        "Overview": ["Role", "Responsibilities"],
+        "What Do They Need": ["Triggers", "Challenges/Pain Points", "Optimum Solution"],
+        "How Do They Choose": ["Role in Buying Decision", "Role in Buying Committee", "Decision Making Criteria", "Buyer Journey"],
+        "How Can We Serve Them": ["Messaging Needs", "Influences"]
+    },
+    "job": {
+        "Overview": ["Job to be Done", "Importance"],
+        "What Do They Need": ["Current Solutions", "Pain Points"],
+        "How Do They Choose": ["Trigger"],
+        "How Can We Serve Them": ["How Zinc Work Helps"]
+    }
+}
 
 def display_info_with_cards(df, section):
     if not df.empty:
@@ -49,27 +69,7 @@ def display_info_with_cards(df, section):
                         st.markdown(card_html, unsafe_allow_html=True)
 
 
-    group_headings = {
-    "industry": {
-        "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
-        "What Do They Need": ["Industry-Specific Needs", "Key Drivers for Background Checks", "Challenges and Concerns"],
-        "How Do They Choose": ["Preferred Features in a Solution", "Decision Influencers"],
-        "How Can We Serve Them": ["Common Roles Involved in Hiring Process", "Messaging and Communication"]
-    },
-    "role": {
-        "Overview": ["Role", "Responsibilities"],
-        "What Do They Need": ["Triggers", "Challenges/Pain Points", "Optimum Solution"],
-        "How Do They Choose": ["Role in Buying Decision", "Role in Buying Committee", "Decision Making Criteria", "Buyer Journey"],
-        "How Can We Serve Them": ["Messaging Needs", "Influences"]
-    },
-    "job": {
-        "Overview": ["Job to be Done", "Importance"],
-        "What Do They Need": ["Current Solutions", "Pain Points"],
-        "How Do They Choose": ["Trigger"],
-        "How Can We Serve Them": ["How Zinc Work Helps"]
-    }
-}
-
+   
 
         
 
