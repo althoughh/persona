@@ -19,14 +19,20 @@ def run():
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
 
-    # Display role information using Bootstrap cards
+    # Display industry, role, and JTBD information using Bootstrap cards
+    if selected_industry:
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry])
     if selected_role:
-        role_info = role_df[role_df['Role'] == selected_role]
-        if not role_info.empty:
-            for column in role_info.columns:
-                content = role_info.iloc[0][column]
-                card_html = get_bootstrap_card_html(column, content)
-                st.markdown(card_html, unsafe_allow_html=True)
+        display_info_with_cards(role_df[role_df['Role'] == selected_role])
+    if selected_job:
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job])
+
+def display_info_with_cards(df):
+    if not df.empty:
+        for column in df.columns:
+            content = df.iloc[0][column]
+            card_html = get_bootstrap_card_html(column, content)
+            st.markdown(card_html, unsafe_allow_html=True)
 
 def get_bootstrap_card_html(title, content):
     return f"""
