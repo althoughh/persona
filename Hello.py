@@ -29,9 +29,9 @@ def run():
 
 def display_info_with_cards(df, section):
     if not df.empty:
-        columns = st.columns(3)  # Adjust the number of columns as needed
+        columns = st.columns(4)  # Adjust the number of columns as needed
         for i, column in enumerate(df.columns):
-            with columns[i % 3]:  # Adjust the modulo as per the number of columns
+            with columns[i % 4]:  # Adjust the modulo as per the number of columns
                 content = df.iloc[0][column]
                 card_html = get_bootstrap_card_html(column, content, section)
                 st.markdown(card_html, unsafe_allow_html=True)
