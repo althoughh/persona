@@ -19,7 +19,7 @@ def run():
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
 
-    # Display information in grid layout with different card styles
+  # Display information based on selection
     if selected_industry:
         display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
     if selected_role:
@@ -29,13 +29,28 @@ def run():
 
 def display_info_with_cards(df, section):
     if not df.empty:
-        columns = st.columns(4)  # Adjust the number of columns as needed
-        for i, column in enumerate(df.columns):
-            with columns[i % 4]:  # Adjust the modulo as per the number of columns
-                content = df.iloc[0][column]
-                card_html = get_bootstrap_card_html(column, content, section)
-                st.markdown(card_html, unsafe_allow_html=True)
+        # Define the groups for each section
+        groups = {
+            "industry": ["Industry Overview", "Regulatory Environment", "Impact on Operations", 
+                         "Industry-Specific Needs", "Key Drivers for Background Checks", "Challenges and Concerns", 
+                         "Preferred Features in a Solution", "Decision Influencers", 
+                         "Common Roles Involved in Hiring Process", "Messaging and Communication"],
+            "role": ["Role", "Responsibilities", 
+                     "Triggers", "Challenges/Pain Points", "Optimum Solution", 
+                     "Role in Buying Decision", "Role in Buying Committee", "Decision Making Criteria", "Buyer Journey", 
+                     "Messaging Needs", "Influences"],
+            "job": ["Job to be Done", "Importance", 
+                    "Current Solutions", "Pain Points", 
+                    "Trigger", 
+                    "How Zinc Work Helps"]
+        }
 
+        # Display the data in a grid layout
+        for group in groups.get(section, []):
+            if group in df.columns:
+                st.markdown(f"### {group}")
+                content = df.iloc[0][group]
+                st.write(content)  # Display the content as text
 def get_bootstrap_card_html(title, content, section):
     if section == "industry":
         # Customize for industry
