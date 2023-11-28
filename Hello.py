@@ -37,25 +37,41 @@ def display_info_with_cards(df, section):
             "How Can We Serve Them": "info"
         }
 
-        # Group headings and corresponding columns
-        group_headings = {
-            "Overview": ["Industry Overview", "Role", "Job to be Done"],
-            "What Do They Need": ["Industry-Specific Needs", "Triggers", "Current Solutions"],
-            "How Do They Choose": ["Preferred Features in a Solution", "Role in Buying Decision", "Trigger"],
-            "How Can We Serve Them": ["Common Roles Involved in Hiring Process", "Messaging Needs", "How Zinc Work Helps"]
-        }
-
-        # Iterate through each group
-        for group, columns in group_headings.items():
+        # Use the correct group headings based on the section
+        for group, columns in group_headings[section].items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
-            columns = st.columns(4)  # Adjust the number of columns as needed
+            columns_container = st.columns(4)  # Adjust the number of columns as needed
             for i, column in enumerate(columns):
                 if column in df.columns:
                     content = df.iloc[0][column]
                     card_html = get_bootstrap_card_html(column, content, section)
-                    with columns[i % 4]:  # Adjust the modulo as per the number of columns
+                    with columns_container[i % 4]:  # Adjust the modulo as per the number of columns
                         st.markdown(card_html, unsafe_allow_html=True)
 
+
+      group_headings = {
+    "industry": {
+        "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
+        "What Do They Need": ["Industry-Specific Needs", "Key Drivers for Background Checks", "Challenges and Concerns"],
+        "How Do They Choose": ["Preferred Features in a Solution", "Decision Influencers"],
+        "How Can We Serve Them": ["Common Roles Involved in Hiring Process", "Messaging and Communication"]
+    },
+    "role": {
+        "Overview": ["Role", "Responsibilities"],
+        "What Do They Need": ["Triggers", "Challenges/Pain Points", "Optimum Solution"],
+        "How Do They Choose": ["Role in Buying Decision", "Role in Buying Committee", "Decision Making Criteria", "Buyer Journey"],
+        "How Can We Serve Them": ["Messaging Needs", "Influences"]
+    },
+    "job": {
+        "Overview": ["Job to be Done", "Importance"],
+        "What Do They Need": ["Current Solutions", "Pain Points"],
+        "How Do They Choose": ["Trigger"],
+        "How Can We Serve Them": ["How Zinc Work Helps"]
+    }
+}
+
+
+        
 
 def get_bootstrap_card_html(title, content, section):
 
