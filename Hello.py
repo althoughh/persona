@@ -44,12 +44,12 @@ def display_info_with_cards(df, section):
             for i, column in enumerate(columns):
                 if column in df.columns:
                     content = df.iloc[0][column]
-                    card_html = get_bootstrap_card_html(column, content, section)
+                    card_html = get_bootstrap_card_html(column, content, color_scheme[group])
                     with columns_container[i % 4]:  # Adjust the modulo as per the number of columns
                         st.markdown(card_html, unsafe_allow_html=True)
 
 
-      group_headings = {
+    group_headings = {
     "industry": {
         "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
         "What Do They Need": ["Industry-Specific Needs", "Key Drivers for Background Checks", "Challenges and Concerns"],
@@ -73,8 +73,7 @@ def display_info_with_cards(df, section):
 
         
 
-def get_bootstrap_card_html(title, content, section):
-
+def get_bootstrap_card_html(title, content, card_color):
     return f"""
         <div class="card border-{card_color} mb-3" style="max-width: 18rem;">
             <div class="card-header bg-transparent border-{card_color}">{title}</div>
@@ -85,6 +84,7 @@ def get_bootstrap_card_html(title, content, section):
             <div class="card-footer bg-transparent border-{card_color}">Footer</div>
         </div>
     """
+
 
 if __name__ == "__main__":
     run()
