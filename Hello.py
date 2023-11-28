@@ -48,10 +48,14 @@ def display_info_with_cards(df, section):
         # Iterate through each group
         for group, columns in group_headings.items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
-            for column in columns:
+            columns = st.columns(4)  # Adjust the number of columns as needed
+            for i, column in enumerate(columns):
                 if column in df.columns:
                     content = df.iloc[0][column]
-                    st.write(content)  # Display the content
+                    card_html = get_bootstrap_card_html(column, content, section)
+                    with columns[i % 4]:  # Adjust the modulo as per the number of columns
+                        st.markdown(card_html, unsafe_allow_html=True)
+
 
 def get_bootstrap_card_html(title, content, section):
     if section == "industry":
