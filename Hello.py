@@ -19,30 +19,42 @@ def run():
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
 
-    # Display industry, role, and JTBD information using Bootstrap cards
+    # Display information in grid layout with different card styles
     if selected_industry:
-        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry])
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
     if selected_role:
-        display_info_with_cards(role_df[role_df['Role'] == selected_role])
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
     if selected_job:
-        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job])
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
 
-def display_info_with_cards(df):
+def display_info_with_cards(df, section):
     if not df.empty:
-        for column in df.columns:
-            content = df.iloc[0][column]
-            card_html = get_bootstrap_card_html(column, content)
-            st.markdown(card_html, unsafe_allow_html=True)
+        columns = st.columns(3)  # Adjust the number of columns as needed
+        for i, column in enumerate(df.columns):
+            with columns[i % 3]:  # Adjust the modulo as per the number of columns
+                content = df.iloc[0][column]
+                card_html = get_bootstrap_card_html(column, content, section)
+                st.markdown(card_html, unsafe_allow_html=True)
 
-def get_bootstrap_card_html(title, content):
+def get_bootstrap_card_html(title, content, section):
+    if section == "industry":
+        # Customize for industry
+        card_color = "primary"
+    elif section == "role":
+        # Customize for role
+        card_color = "success"
+    else:
+        # Customize for job
+        card_color = "warning"
+
     return f"""
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent border-success">{title}</div>
-            <div class="card-body text-success">
+        <div class="card border-{card_color} mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-{card_color}">{title}</div>
+            <div class="card-body text-{card_color}">
                 <h5 class="card-title">{title}</h5>
                 <p class="card-text">{content}</p>
             </div>
-            <div class="card-footer bg-transparent border-success">Footer</div>
+            <div class="card-footer bg-transparent border-{card_color}">Footer</div>
         </div>
     """
 
