@@ -61,22 +61,20 @@ def display_info_with_cards(df, section):
         # Use the correct group headings based on the section
         for group, columns in group_headings[section].items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
-            columns_container = st.columns(4)  # Adjust the number of columns as needed
+            
+            # Adjust the number of columns based on the screen size
+            columns_container = st.columns([1, 2, 1])  # This creates a more responsive layout
+
             for i, column in enumerate(columns):
                 if column in df.columns:
                     content = df.iloc[0][column]
                     card_html = get_bootstrap_card_html(column, content, color_scheme[group])
-                    with columns_container[i % 4]:  # Adjust the modulo as per the number of columns
+                    with columns_container[i % len(columns_container)]:  # Use the length of columns_container for modulo
                         st.markdown(card_html, unsafe_allow_html=True)
-
-
-   
-
-        
 
 def get_bootstrap_card_html(title, content, card_color):
     return f"""
-        <div class="card border-{card_color} mb-3" style="max-width: 18rem;">
+        <div class="card border-{card_color} mb-3" style="width: 100%;">  <!-- Adjusted width to 100% -->
             <div class="card-header bg-transparent border-{card_color}">{title}</div>
             <div class="card-body text-{card_color}">
                 <h5 class="card-title">{title}</h5>
