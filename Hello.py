@@ -62,13 +62,11 @@ def display_info_with_cards(df, section):
 
 def get_bootstrap_card_html(title, content, card_color, num_columns):
     card_width = "100%"  # Adjust the width to 100% of the column
-    # Reduced padding and margin for a smaller card
     return f"""
-        <div class="card border-{card_color} mb-2" style="width: {card_width}; margin: 2px; padding: 5px;">                <h6 class="card-title">{title}</h6>
-
-            <div class="card-
-            body text-{card_color}">
-                <p class="card-text" style="font-size: 0.9em;">{content}</p>
+        <div class="card border-{card_color} mb-2" style="width: {card_width}; margin: 2px;">
+            <h4 class="card-header bg-transparent border-{card_color}" style="margin-bottom: 0;">{title}</h4>
+            <div class="card-body text-{card_color}" style="padding: 5px; font-size: 0.9em;">
+                <p class="card-text">{content}</p>
             </div>
         </div>
     """
