@@ -95,15 +95,16 @@ def display_info_with_cards(df, section):
 def get_bootstrap_card_html(title, content, card_color, num_columns):
     card_width = f"{100 / num_columns}%"  # Set width relative to the number of columns
     return f"""
-        <div class="card border-{card_color} mb-3" style="width: {card_width};">
-            <div class="card-header bg-transparent border-{card_color}">{title}</div>
+        <div class="card border-{card_color} mb-3" style="width: {card_width}; margin: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); border-radius: 10px;">
+            <div class="card-header bg-transparent border-{card_color}" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">{title}</div>
             <div class="card-body text-{card_color}">
                 <h5 class="card-title">{title}</h5>
-                <p class="card-text">{content}</p>
+                <p class="card-text" style="white-space: pre-line;">{content}</p>
             </div>
-            <div class="card-footer bg-transparent border-{card_color}">Footer</div>
+            <div class="card-footer bg-transparent border-{card_color}" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">Footer</div>
         </div>
     """
+
 
 
 if __name__ == "__main__":
