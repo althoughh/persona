@@ -67,20 +67,20 @@ def run():
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
 
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
-
-    # Button to Get Content Ideas
-     if st.button("Get Content Ideas"):
+if st.sidebar.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
-
-        if content_ideas.empty:
-            st.write("No content ideas available for the selected criteria.")
-        else:
-            with st.expander("Content Ideas:"):  # This creates an expandable section
-                for index, row in content_ideas.iterrows():
-                    # Each content name as a clickable link using HTML
-                    link = f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>"
-                    st.markdown(link, unsafe_allow_html=True)
-
+        show_content_ideas(content_ideas)
+    # Button to Get Content Ideas
+   def show_content_ideas(content_ideas):
+    if content_ideas.empty:
+        st.sidebar.write("No content ideas available for the selected criteria.")
+    else:
+        with st.sidebar.container():
+            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px;'>", unsafe_allow_html=True)
+            st.sidebar.write("Content Ideas:")
+            for idea in content_ideas:
+                st.sidebar.markdown(f"<a href='{idea['URL']}' target='_blank'>{idea['Name']}</a>", unsafe_allow_html=True)
+            st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 
     
