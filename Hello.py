@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-
+st.set_page_config(layout="wide")  # Set the layout to 'wide'
+st.sidebar.success("Select some options.")
 color_scheme = {
     "Overview": "#007bff",  # Example color
     "What Do They Need": "#28a745",
