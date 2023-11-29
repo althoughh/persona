@@ -65,6 +65,7 @@ def get_bootstrap_card_html(title, content, card_color, num_columns):
     return f"""
         <div class="card border-{card_color} mb-2" style="width: {card_width}; margin: 2px;">
             <h4 class="card-header bg-transparent border-{card_color}" style="margin-bottom: 0;">{title}</h4>
+            <hr style="margin: 0;"/>
             <div class="card-body text-{card_color}" style="padding: 5px; font-size: 0.9em;">
                 <p class="card-text">{content}</p>
             </div>
