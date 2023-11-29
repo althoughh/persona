@@ -16,7 +16,6 @@ sidebar_style = """
     color: #000000;  # Change text colour as needed
     padding: 10px;  # Adjust padding if necessary
     font-family: Arial, sans-serif;  # Choose your font
-    // Add any other styles you need
 }
 </style>
 """
@@ -104,6 +103,7 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
         display_info_with_cards(role_df[role_df['Role'] == selected_role], "role", selected_role)
     if selected_job:
         display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job", selected_job)
+
 def run():
     st.sidebar.success("Select some options.")
     st.markdown(sidebar_style, unsafe_allow_html=True)
