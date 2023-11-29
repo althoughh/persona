@@ -15,7 +15,7 @@ group_headings = {
         "How Can We Serve Them": ["Messaging Needs", "Influences"]
     },
     "job": {
-        "Overview": ["Job to be Done", "Importance"],
+        "Overview": ["Job Name", "Importance"],
         "What Do They Need": ["Current Solutions", "Pain Points"],
         "How Do They Choose": ["Trigger"],
         "How Can We Serve Them": ["How Zinc Work Helps"]
@@ -39,13 +39,14 @@ def run():
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
 
-  # Display information based on selection
-    if selected_industry:
-        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "Industry")
-    if selected_role:
-        display_info_with_cards(role_df[role_df['Role'] == selected_role], "Role")
-    if selected_job:
-        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "Job")
+    # Display information based on selection
+if selected_industry:
+    display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")  # Lowercase "industry"
+if selected_role:
+    display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")  # Lowercase "role"
+if selected_job:
+    display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")  # Lowercase "job"
+
 
 
 def display_info_with_cards(df, section):
