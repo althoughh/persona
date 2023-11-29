@@ -35,12 +35,11 @@ def get_content_ideas(df, selected_industry, selected_role):
 
 def display_info_with_cards(df, section, selected_value):
     if not df.empty:
-        # Update the title to include the specific industry, role, or job
         display_title = f"{section.capitalize()}: {selected_value}" if selected_value else section.capitalize()
         st.markdown(f"## {display_title}")
 
         for group, categories in group_headings[section].items():
-            st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3>{group}</h3>")
             
             num_columns = len(categories)
             columns_container = st.columns(num_columns)
@@ -48,12 +47,13 @@ def display_info_with_cards(df, section, selected_value):
             for i, category in enumerate(categories):
                 if category in df.columns:
                     content = df.iloc[0][category]
-                    card_html = get_bootstrap_card_html(category, content, color_scheme[group], num_columns)
+                    card_html = get_bootstrap_card_html(category, content, group, num_columns)
                     with columns_container[i]:
                         st.markdown(card_html, unsafe_allow_html=True)
 
-def get_bootstrap_card_html(title, content, card_color, num_columns):
-    card_width = "100%"  # Adjust the width to 100% of the column
+def get_bootstrap_card_html(title, content, group, num_columns):
+    card_color = color_scheme.get(group, "#6c757d")  # Default color if group not found
+    card_width = "100%"
     return f"""
         <div style="width: {card_width}; margin: 2px; padding: 5px; 
                     border: 1px solid {card_color}; border-radius: 5px;
@@ -62,6 +62,7 @@ def get_bootstrap_card_html(title, content, card_color, num_columns):
             <p style="font-size: 0.9em;">{content}</p>
         </div>
     """
+
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
