@@ -47,15 +47,6 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
 
-    # Display information based on selection
-    if selected_industry:
-        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")  # Lowercase "industry"
-    if selected_role:
-        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")  # Lowercase "role"
-    if selected_job:
-        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")  # Lowercase "job"
-
-
 
 def display_info_with_cards(df, section):
     if not df.empty:
