@@ -17,8 +17,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.title(‘The Ramsey Highlights’)
-st.header(‘New Data Collection’)
+
 
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
