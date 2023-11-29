@@ -49,10 +49,6 @@ def get_content_ideas(df, selected_industry, selected_role):
 
     return df['Name']  # Assuming 'Name' column contains the content titles
 
-
-def run():
-    # ... [earlier parts of your code]
-
 def run():
     st.sidebar.success("Select some options.")
     
