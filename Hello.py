@@ -105,11 +105,6 @@ def run():
 
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
-    # Injecting Bootstrap CSS
-    st.markdown("""
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    """, unsafe_allow_html=True)
-
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
