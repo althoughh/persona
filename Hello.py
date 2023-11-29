@@ -40,20 +40,39 @@ group_headings = {
         "How Can We Serve Them": ["How Zinc Work Helps"]
     }
 }
+
+def get_content_ideas(df, selected_industry, selected_role):
+    if selected_industry:
+        df = df[df[selected_industry]]
+    if selected_role:
+        df = df[df[selected_role]]
+
+    return df['Name']  # Assuming 'Name' column contains the content titles
+
+
 def run():
     st.sidebar.success("Select some options.")
-
+   
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
+    blog_df = pd.read_csv('blog.csv')
 
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
     selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
-
+if st.button("Get Content Ideas"):
+        content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
+        
+        if content_ideas.empty:
+            st.write("No content ideas available for the selected criteria.")
+        else:
+            st.write("Content Ideas:")
+            for idea in content_ideas:
+                st.write(idea)
 def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
     if selected_industry:
         display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
