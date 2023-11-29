@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 
+color_scheme = {
+    "Overview": "#007bff",  # Blue
+    "What Do They Need": "#28a745",  # Green
+    "How Do They Choose": "#ffc107",  # Yellow
+    "How Can We Serve Them": "#17a2b8"  # Cyan
+}
+
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
     "industry": {
