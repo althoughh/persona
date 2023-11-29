@@ -57,7 +57,7 @@ def run():
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
-    blog_df = pd.read_csv('blog.csv')
+    content_df = pd.read_csv('blog.csv')
 
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
