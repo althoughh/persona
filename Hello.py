@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 
 # Define the group headings outside the functions to make it globally accessible
-
 group_headings = {
     "industry": {
         "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
@@ -23,6 +22,7 @@ group_headings = {
         "How Can We Serve Them": ["How Zinc Work Helps"]
     }
 }
+
 def get_content_ideas(df, selected_industry, selected_role):
     base_url = "https://zincwork.com/blog/"
     if selected_industry:
@@ -84,6 +84,14 @@ def show_content_ideas(content_ideas):
                 st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
             st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
+def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+    if selected_industry:
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
+    if selected_role:
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
+    if selected_job:
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
+
 def run():
     st.sidebar.success("Select some options.")
    
@@ -110,11 +118,5 @@ def run():
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
         show_content_ideas(content_ideas)
 
-def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
-    # ... [Your existing display_data_based_on_selection function]
-
 if __name__ == "__main__":
     run()
-
-
-
