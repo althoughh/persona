@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 st.set_page_config(layout="wide") 
+st.title(‘The Ramsey Highlights’)
+st.header(‘New Data Collection’)
+
+
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
     "industry": {
