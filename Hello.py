@@ -33,23 +33,15 @@ def get_content_ideas(df, selected_industry, selected_role):
     df['URL'] = base_url + df['Slug']
     return df[['Name', 'URL']]
 
-def display_info_with_cards(df, section):
+def display_info_with_cards(df, section, selected_value):
     if not df.empty:
-        st.markdown(f"## {section.capitalize()}")  # Title for the container
+        # Update the title to include the specific industry, role, or job
+        display_title = f"{section.capitalize()}: {selected_value}" if selected_value else section.capitalize()
+        st.markdown(f"## {display_title}")
 
-        # Define the color scheme for each group
-        color_scheme = {
-            "Overview": "primary",
-            "What Do They Need": "success",
-            "How Do They Choose": "warning",
-            "How Can We Serve Them": "info"
-        }
-
-        # Use the correct group headings based on the section
         for group, categories in group_headings[section].items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
             
-            # Adjust the number of columns dynamically based on the number of categories
             num_columns = len(categories)
             columns_container = st.columns(num_columns)
 
@@ -70,7 +62,6 @@ def get_bootstrap_card_html(title, content, card_color, num_columns):
             <p style="font-size: 0.9em;">{content}</p>
         </div>
     """
-
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
