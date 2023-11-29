@@ -1,9 +1,24 @@
 import streamlit as st
 import pandas as pd
-st.set_page_config(layout="wide") 
+
+
+st.set_page_config(page_title="The Ramsey Highlights", layout="wide")
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
+        width: 400px;
+    }
+    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
+        width: 400px;
+        margin-left: -400px;
+    }
+     
+    """,
+    unsafe_allow_html=True,
+)
 st.title(‘The Ramsey Highlights’)
 st.header(‘New Data Collection’)
-
 
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
