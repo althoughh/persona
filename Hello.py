@@ -60,7 +60,16 @@ def run():
     jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
     content_df = pd.read_csv('blog.csv')  # Ensure this is the correct path to your CSV
-
+def show_content_ideas(content_ideas):
+    if content_ideas.empty:
+        st.sidebar.write("No content ideas available for the selected criteria.")
+    else:
+        with st.sidebar.container():
+            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px;'>", unsafe_allow_html=True)
+            st.sidebar.write("Content Ideas:")
+            for idea in content_ideas:
+                st.sidebar.markdown(f"<a href='{idea['URL']}' target='_blank'>{idea['Name']}</a>", unsafe_allow_html=True)
+            st.sidebar.markdown("</div>", unsafe_allow_html=True)
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
     selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
@@ -71,16 +80,7 @@ if st.sidebar.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
         show_content_ideas(content_ideas)
     # Button to Get Content Ideas
-   def show_content_ideas(content_ideas):
-    if content_ideas.empty:
-        st.sidebar.write("No content ideas available for the selected criteria.")
-    else:
-        with st.sidebar.container():
-            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px;'>", unsafe_allow_html=True)
-            st.sidebar.write("Content Ideas:")
-            for idea in content_ideas:
-                st.sidebar.markdown(f"<a href='{idea['URL']}' target='_blank'>{idea['Name']}</a>", unsafe_allow_html=True)
-            st.sidebar.markdown("</div>", unsafe_allow_html=True)
+   
 
 
     
