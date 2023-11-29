@@ -1,25 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-
-st.set_page_config(page_title="The Ramsey Highlights", layout="wide")
-st.markdown(
-    """
-    <style>
-    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
-        width: 350px;
-    }
-    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
-        width: 350px;
-        margin-left: -350px;
-    }
-     
-    """,
-    unsafe_allow_html=True,
-)
-
-
 # Define the group headings outside the functions to make it globally accessible
+
 group_headings = {
     "industry": {
         "Overview": ["Industry Overview", "Regulatory Environment", "Impact on Operations"],
@@ -40,7 +23,6 @@ group_headings = {
         "How Can We Serve Them": ["How Zinc Work Helps"]
     }
 }
-
 def get_content_ideas(df, selected_industry, selected_role):
     base_url = "https://zincwork.com/blog/"
     if selected_industry:
@@ -48,53 +30,9 @@ def get_content_ideas(df, selected_industry, selected_role):
     if selected_role:
         df = df[df[selected_role]]
 
-    # Prepend base_url to the slug and return a DataFrame with Name and URL
     df['URL'] = base_url + df['Slug']
     return df[['Name', 'URL']]
 
-def run():
-    st.sidebar.success("Select some options.")
-    
-    # Load the CSV files
-    industry_df = pd.read_csv('industry.csv')
-    jtbd_df = pd.read_csv('jtbd.csv')
-    role_df = pd.read_csv('role.csv')
-    content_df = pd.read_csv('blog.csv')  # Ensure this is the correct path to your CSV
-def show_content_ideas(content_ideas):
-    if content_ideas.empty:
-        st.sidebar.write("No content ideas available for the selected criteria.")
-    else:
-        with st.sidebar.container():
-            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px;'>", unsafe_allow_html=True)
-            st.sidebar.write("Content Ideas:")
-            for idea in content_ideas:
-                st.sidebar.markdown(f"<a href='{idea['URL']}' target='_blank'>{idea['Name']}</a>", unsafe_allow_html=True)
-            st.sidebar.markdown("</div>", unsafe_allow_html=True)
-    # Sidebar Dropdowns
-    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
-    selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
-    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
-
-    display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
-if st.sidebar.button("Get Content Ideas"):
-        content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
-        show_content_ideas(content_ideas)
-    # Button to Get Content Ideas
-   
-
-
-    
-def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
-    if selected_industry:
-        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
-    if selected_role:
-        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
-    if selected_job:
-        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
-    # Injecting Bootstrap CSS
-    st.markdown("""
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    """, unsafe_allow_html=True)
 def display_info_with_cards(df, section):
     if not df.empty:
         st.markdown(f"## {section.capitalize()}")  # Title for the container
@@ -135,8 +73,48 @@ def get_bootstrap_card_html(title, content, card_color, num_columns):
         </div>
     """
 
+def show_content_ideas(content_ideas):
+    if content_ideas.empty:
+        st.sidebar.write("No content ideas available for the selected criteria.")
+    else:
+        with st.sidebar.container():
+            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px; margin-bottom: 10px;'>", unsafe_allow_html=True)
+            st.sidebar.write("Content Ideas:")
+            for index, row in content_ideas.iterrows():
+                st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
+            st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
+def run():
+    st.sidebar.success("Select some options.")
+   
+    # Load the CSV files
+    industry_df = pd.read_csv('industry.csv')
+    jtbd_df = pd.read_csv('jtbd.csv')
+    role_df = pd.read_csv('role.csv')
+    content_df = pd.read_csv('blog.csv')
 
+    # Sidebar Dropdowns
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
+    selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
+
+    display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
+
+    # Injecting Bootstrap CSS
+    st.markdown("""
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    """, unsafe_allow_html=True)
+
+    # Button in the sidebar for content ideas
+    if st.sidebar.button("Get Content Ideas"):
+        content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
+        show_content_ideas(content_ideas)
+
+def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+    # ... [Your existing display_data_based_on_selection function]
 
 if __name__ == "__main__":
     run()
+
+
+
