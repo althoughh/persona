@@ -2,13 +2,24 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(layout="wide")  # Set the layout to 'wide'
-st.sidebar.success("Select some options.")
 color_scheme = {
     "Overview": "#007bff",  # Example color
     "What Do They Need": "#28a745",
     "How Do They Choose": "#ffc107",
     "How Can We Serve Them": "#17a2b8"
 }
+
+sidebar_style = """
+<style>
+.css-1lcbmhc {  # This class targets the sidebar
+    background-color: #f1f1f1;  # Change to your desired background colour
+    color: #000000;  # Change text colour as needed
+    padding: 10px;  # Adjust padding if necessary
+    font-family: Arial, sans-serif;  # Choose your font
+    // Add any other styles you need
+}
+</style>
+"""
 
 
 # Define the group headings outside the functions to make it globally accessible
@@ -95,7 +106,8 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
         display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job", selected_job)
 def run():
     st.sidebar.success("Select some options.")
-   
+    st.markdown(sidebar_style, unsafe_allow_html=True)
+
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
