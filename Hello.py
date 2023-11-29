@@ -33,7 +33,15 @@ def run():
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
     selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
+    display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
+def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+    if selected_industry:
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
+    if selected_role:
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
+    if selected_job:
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
     # Injecting Bootstrap CSS
     st.markdown("""
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
