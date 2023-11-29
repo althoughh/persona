@@ -75,13 +75,13 @@ def show_content_ideas(content_ideas):
             st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+    # Pass the selected value to display_info_with_cards
     if selected_industry:
-        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry", selected_industry)
     if selected_role:
-        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role", selected_role)
     if selected_job:
-        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")
-
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job", selected_job)
 def run():
     st.sidebar.success("Select some options.")
    
