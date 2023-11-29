@@ -40,12 +40,12 @@ def run():
     """, unsafe_allow_html=True)
 
     # Display information based on selection
-if selected_industry:
-    display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")  # Lowercase "industry"
-if selected_role:
-    display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")  # Lowercase "role"
-if selected_job:
-    display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")  # Lowercase "job"
+    if selected_industry:
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")  # Lowercase "industry"
+    if selected_role:
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role")  # Lowercase "role"
+    if selected_job:
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job")  # Lowercase "job"
 
 
 
