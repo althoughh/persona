@@ -69,7 +69,7 @@ def run():
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
     # Button to Get Content Ideas
-    if st.button("Get Content Ideas"):
+     if st.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
 
         if content_ideas.empty:
@@ -77,9 +77,9 @@ def run():
         else:
             with st.expander("Content Ideas:"):  # This creates an expandable section
                 for index, row in content_ideas.iterrows():
-                    # Each content name as a clickable link
-                    st.markdown(f"[{row['Name']}]({row['URL']})", unsafe_allow_html=True)
-
+                    # Each content name as a clickable link using HTML
+                    link = f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>"
+                    st.markdown(link, unsafe_allow_html=True)
 
 
 
