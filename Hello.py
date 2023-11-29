@@ -51,20 +51,26 @@ def get_content_ideas(df, selected_industry, selected_role):
 
 
 def run():
+    # ... [earlier parts of your code]
+
+def run():
     st.sidebar.success("Select some options.")
-   
+    
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
-    content_df = pd.read_csv('blog.csv')
+    content_df = pd.read_csv('blog.csv')  # Ensure this is the correct path to your CSV
 
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
     selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
+
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
-if st.button("Get Content Ideas"):
+
+    # Button to Get Content Ideas
+    if st.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
         
         if content_ideas.empty:
@@ -73,6 +79,11 @@ if st.button("Get Content Ideas"):
             st.write("Content Ideas:")
             for idea in content_ideas:
                 st.write(idea)
+
+
+
+
+    
 def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
     if selected_industry:
         display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry")
