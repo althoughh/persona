@@ -96,6 +96,7 @@ def run():
     selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
 
+    # Display data based on selection
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
     # Button in the sidebar for content ideas
