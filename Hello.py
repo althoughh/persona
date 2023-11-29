@@ -65,10 +65,10 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
     st.markdown("""
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     """, unsafe_allow_html=True)
-
-
 def display_info_with_cards(df, section):
     if not df.empty:
+        st.markdown(f"## {section.capitalize()}")  # Title for the container
+
         # Define the color scheme for each group
         color_scheme = {
             "Overview": "primary",
@@ -81,29 +81,30 @@ def display_info_with_cards(df, section):
         for group, categories in group_headings[section].items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
             
-            # Dynamically determine the number of columns
-            num_columns = min(len(categories), 4)  # Adjust max number of columns if needed
+            # Adjust the number of columns dynamically based on the number of categories
+            num_columns = len(categories)
             columns_container = st.columns(num_columns)
 
             for i, category in enumerate(categories):
                 if category in df.columns:
                     content = df.iloc[0][category]
                     card_html = get_bootstrap_card_html(category, content, color_scheme[group], num_columns)
-                    with columns_container[i % num_columns]:
+                    with columns_container[i]:
                         st.markdown(card_html, unsafe_allow_html=True)
 
 def get_bootstrap_card_html(title, content, card_color, num_columns):
-    card_width = f"{100 / num_columns}%"  # Set width relative to the number of columns
+    card_width = "100%"  # Adjust the width to 100% of the column
     return f"""
-        <div class="card border-{card_color} mb-3" style="width: {card_width}; margin: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); border-radius: 10px;">
-            <div class="card-header bg-transparent border-{card_color}" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">{title}</div>
+        <div class="card border-{card_color} mb-3" style="width: {card_width};">
+            <div class="card-header bg-transparent border-{card_color}">{title}</div>
             <div class="card-body text-{card_color}">
                 <h5 class="card-title">{title}</h5>
-                <p class="card-text" style="white-space: pre-line;">{content}</p>
+                <p class="card-text">{content}</p>
             </div>
-            <div class="card-footer bg-transparent border-{card_color}" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">Footer</div>
+            <div class="card-footer bg-transparent border-{card_color}">Footer</div>
         </div>
     """
+
 
 
 
