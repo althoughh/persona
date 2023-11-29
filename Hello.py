@@ -7,11 +7,11 @@ st.markdown(
     """
     <style>
     [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
-        width: 400px;
+        width: 350px;
     }
     [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
-        width: 400px;
-        margin-left: -400px;
+        width: 350px;
+        margin-left: -350px;
     }
      
     """,
@@ -78,22 +78,24 @@ def display_info_with_cards(df, section):
         }
 
         # Use the correct group headings based on the section
-        for group, columns in group_headings[section].items():
+        for group, categories in group_headings[section].items():
             st.markdown(f"<h3 style='color: {color_scheme[group]};'>{group}</h3>", unsafe_allow_html=True)
             
-            # Adjust the number of columns based on the screen size
-            columns_container = st.columns([1, 2, 1])  # This creates a more responsive layout
+            # Dynamically determine the number of columns
+            num_columns = min(len(categories), 4)  # Adjust max number of columns if needed
+            columns_container = st.columns(num_columns)
 
-            for i, column in enumerate(columns):
-                if column in df.columns:
-                    content = df.iloc[0][column]
-                    card_html = get_bootstrap_card_html(column, content, color_scheme[group])
-                    with columns_container[i % len(columns_container)]:  # Use the length of columns_container for modulo
+            for i, category in enumerate(categories):
+                if category in df.columns:
+                    content = df.iloc[0][category]
+                    card_html = get_bootstrap_card_html(category, content, color_scheme[group], num_columns)
+                    with columns_container[i % num_columns]:
                         st.markdown(card_html, unsafe_allow_html=True)
 
-def get_bootstrap_card_html(title, content, card_color):
+def get_bootstrap_card_html(title, content, card_color, num_columns):
+    card_width = f"{100 / num_columns}%"  # Set width relative to the number of columns
     return f"""
-        <div class="card border-{card_color} mb-3" style="width: 100%;">  <!-- Adjusted width to 100% -->
+        <div class="card border-{card_color} mb-3" style="width: {card_width};">
             <div class="card-header bg-transparent border-{card_color}">{title}</div>
             <div class="card-body text-{card_color}">
                 <h5 class="card-title">{title}</h5>
