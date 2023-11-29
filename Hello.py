@@ -42,12 +42,15 @@ group_headings = {
 }
 
 def get_content_ideas(df, selected_industry, selected_role):
+    base_url = "https://zincwork.com/blog/"
     if selected_industry:
         df = df[df[selected_industry]]
     if selected_role:
         df = df[df[selected_role]]
 
-    return df['Name']  # Assuming 'Name' column contains the content titles
+    # Prepend base_url to the slug and return a DataFrame with Name and URL
+    df['URL'] = base_url + df['Slug']
+    return df[['Name', 'URL']]
 
 def run():
     st.sidebar.success("Select some options.")
@@ -68,13 +71,14 @@ def run():
     # Button to Get Content Ideas
     if st.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
-        
+
         if content_ideas.empty:
             st.write("No content ideas available for the selected criteria.")
         else:
-            st.write("Content Ideas:")
-            for idea in content_ideas:
-                st.write(idea)
+            with st.expander("Content Ideas:"):  # This creates an expandable section
+                for index, row in content_ideas.iterrows():
+                    # Each content name as a clickable link
+                    st.markdown(f"[{row['Name']}]({row['URL']})", unsafe_allow_html=True)
 
 
 
