@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
 
+
 color_scheme = {
-    "Overview": "#007bff",  # Blue
-    "What Do They Need": "#28a745",  # Green
-    "How Do They Choose": "#ffc107",  # Yellow
-    "How Can We Serve Them": "#17a2b8"  # Cyan
+    "Overview": "#007bff",  # Example color
+    "What Do They Need": "#28a745",
+    "How Do They Choose": "#ffc107",
+    "How Can We Serve Them": "#17a2b8"
 }
+
 
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
@@ -59,7 +61,7 @@ def display_info_with_cards(df, section, selected_value):
                         st.markdown(card_html, unsafe_allow_html=True)
 
 def get_bootstrap_card_html(title, content, group, num_columns):
-    card_color = color_scheme.get(group, "#6c757d")  # Default color if group not found
+    card_color = color_scheme.get(group, "#6c757d") 
     card_width = "100%"
     return f"""
         <div style="width: {card_width}; margin: 2px; padding: 5px; 
