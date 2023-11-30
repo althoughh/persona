@@ -154,21 +154,30 @@ def run():
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
-    # Display data based on selections
+    # Display information based on industry selection
     if selected_industry:
-        # Filter and display information for selected industry
-        filtered_df = content_df[content_df['Industry'] == selected_industry]  # Adjust the column name as per your CSV
-        display_info_with_cards(filtered_df, 'industry', selected_industry)
+        # Assume the display_info_with_cards function takes a dataframe, section, and selected_value
+        display_info_with_cards(industry_df, 'industry', selected_industry)
 
+    # Display information based on role selection
     if selected_role:
-        # Filter and display information for selected role
-        filtered_df = content_df[content_df['Role'] == selected_role]  # Adjust the column name as per your CSV
-        display_info_with_cards(filtered_df, 'role', selected_role)
+        display_info_with_cards(role_df, 'role', selected_role)
 
+    # Display information based on job selection
     if selected_job:
-        # Filter and display information for selected job
-        filtered_df = content_df[content_df['Job'] == selected_job]  # Adjust the column name as per your CSV
-        display_info_with_cards(filtered_df, 'job', selected_job)
+        display_info_with_cards(jtbd_df, 'job', selected_job)
+
+    # Sidebar Dropdowns
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
+
+    role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else list(role_df['Role'].unique())
+    selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options)
+
+    job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else list(jtbd_df['Job Name'].unique())
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options)
+
+    st.markdown(sidebar_style, unsafe_allow_html=True)
+
 
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
