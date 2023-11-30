@@ -114,7 +114,7 @@ def run():
     role_df = pd.read_csv('role.csv')
     content_df = pd.read_csv('blog.csv')
     
-    with st.form(key='my_form'):
+  with st.form(key='my_form'):
         # Get headers for the dropdown
         headers = list(industry_df.columns) + list(jtbd_df.columns) + list(role_df.columns)
         
@@ -126,6 +126,7 @@ def run():
     # Handle form submission
     if submit_button:
         st.write(f'You selected {dropdown} and entered {input_value}')
+
 
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
