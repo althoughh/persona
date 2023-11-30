@@ -15,16 +15,17 @@ main_style = """
 body {
     background-color: #ffffff;  # White background for the main page
 }
-
-.css-1lcbmhc {  # This class targets the sidebar
-    background-color: #808080;  # Grey background for the sidebar
-    color: #000000;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-}
 </style>
 """
 
+sidebar_style = """
+<style>
+[data-testid="stSidebar"] {
+    background-color: #D3D3D3;  # Light grey background
+    color: #000000;  # Black text
+}
+</style>
+"""
 
 color_scheme = {
     "Overview": "#007bff",  # Example color
