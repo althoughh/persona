@@ -57,6 +57,8 @@ group_headings = {
         "How Can We Serve Them": ["How Zinc Work Helps"]
     }
 }
+
+
 st.markdown(main_style, unsafe_allow_html=True)
 
 def get_content_ideas(df, selected_industry, selected_role):
@@ -122,7 +124,6 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
 
 def run():
     st.sidebar.success("Select some options.")
-    st.markdown(sidebar_style, unsafe_allow_html=True)
 
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
