@@ -144,28 +144,31 @@ def run():
     content_df = pd.read_csv('blog.csv')
 
     # Sidebar Dropdowns
-    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry']. unique()))
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
 
-    if selected_industry:
-        # If an industry is selected, filter the roles
-        role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique())
-    else:
-        # If no industry is selected, show all roles
-        role_options = list(role_df['Role'].unique())
-
+    role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else list(role_df['Role'].unique())
     selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options)
 
-    if selected_role:
-        # If a role is selected, filter the jobs
-        job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique())
-    else:
-        # If no role is selected, show all jobs
-        job_options = list(jtbd_df['Job Name'].unique())
-
+    job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else list(jtbd_df['Job Name'].unique())
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options)
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
+    # Display data based on selections
+    if selected_industry:
+        # Filter and display information for selected industry
+        filtered_df = content_df[content_df['Industry'] == selected_industry]  # Adjust the column name as per your CSV
+        display_info_with_cards(filtered_df, 'industry', selected_industry)
+
+    if selected_role:
+        # Filter and display information for selected role
+        filtered_df = content_df[content_df['Role'] == selected_role]  # Adjust the column name as per your CSV
+        display_info_with_cards(filtered_df, 'role', selected_role)
+
+    if selected_job:
+        # Filter and display information for selected job
+        filtered_df = content_df[content_df['Job'] == selected_job]  # Adjust the column name as per your CSV
+        display_info_with_cards(filtered_df, 'job', selected_job)
 
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
@@ -174,4 +177,5 @@ def run():
 
 if __name__ == "__main__":
     run()
+
 
