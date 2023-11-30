@@ -134,42 +134,38 @@ def show_content_ideas(content_ideas):
                 st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
             st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
-def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry):
-    # Initialize the selections with None
-    selected_role = None
-    selected_job = None
-
-    # Check if an industry is selected to enable the Role dropdown
-    if selected_industry:
-        selected_role = st.sidebar.selectbox("Select a Role", list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()))
-    else:
-        selected_role = st.sidebar.selectbox("Select a Role", [''], disabled=True)
-
-    # Check if a role is selected to enable the JTBD dropdown
-    if selected_role:
-        selected_job = st.sidebar.selectbox("Select a Job to be Done", list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()))
-    else:
-        selected_job = st.sidebar.selectbox("Select a Job to be Done", [''], disabled=True)
-
-    return selected_role, selected_job
 
 def run():
     st.sidebar.success("Select some options.")
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
-    jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
+    jtbd_df = pd.read_csv('jtbd.csv')
     content_df = pd.read_csv('blog.csv')
 
-     # Sidebar Dropdowns
+    # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry']. unique()))
-    
-    # Call the function and get the selected role and job
-    selected_role, selected_job = display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry)
+
+    if selected_industry:
+        # If an industry is selected, filter the roles
+        role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique())
+    else:
+        # If no industry is selected, show all roles
+        role_options = list(role_df['Role'].unique())
+
+    selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options)
+
+    if selected_role:
+        # If a role is selected, filter the jobs
+        job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique())
+    else:
+        # If no role is selected, show all jobs
+        job_options = list(jtbd_df['Job Name'].unique())
+
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options)
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
-    # Display data based on selection
 
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
