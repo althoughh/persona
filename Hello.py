@@ -2,13 +2,33 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 
-
 im = Image.open("logo.png")
 st.set_page_config(
     page_title="Hello",
     page_icon=im,
     layout="wide",
 )
+
+st.markdown("""
+<style>
+/* The input itself */
+div[data-baseweb="select"] > div {
+  background-color: #ffffff !important;
+  font-size: 23px !important;
+}
+
+/* The list of choices */
+li>span {
+  color: #333 !important;
+  font-size: 35px;
+  background-color: #ffff !important;
+}
+
+li {
+  background-color: #ffff !important;
+}
+</style>
+""", unsafe_allow_html=True)
 # Custom CSS for styling
 main_style = """
 <style>
