@@ -1,8 +1,16 @@
 import streamlit as st
 import pandas as pd
+from PIL import Image
 
-st.set_page_config(layout="wide")  # Set the layout to 'wide'
+
+im = Image.open("logo.png")
+st.set_page_config(
+    page_title="Hello",
+    page_icon=im,
+    layout="wide",
+)
 st.markdown(main_style, unsafe_allow_html=True)
+
 
 # Custom CSS for styling
 main_style = """
