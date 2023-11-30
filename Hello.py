@@ -135,11 +135,6 @@ def show_content_ideas(content_ideas):
             st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
-   # Sidebar Dropdowns
-selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
-selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
-selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
-
 # Check if an industry is selected to enable the Role dropdown
 if selected_industry:
     selected_role = st.sidebar.selectbox("Select a Role", list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()))
@@ -154,7 +149,6 @@ else:
 
 def run():
     st.sidebar.success("Select some options.")
-    st.markdown(sidebar_style, unsafe_allow_html=True)
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
@@ -164,7 +158,12 @@ def run():
  
     # Display data based on selection
     display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
+    # Sidebar Dropdowns
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
+    selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
 
+    st.markdown(sidebar_style, unsafe_allow_html=True)
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
