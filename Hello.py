@@ -124,24 +124,12 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
 
 def run():
     st.sidebar.success("Select some options.")
-    sidebar_style = """
-<style>
-[data-testid="stSidebar"] .css-1e5imcs {  # Adjust the class name as per your Streamlit version
-    background-color: #D3D3D3;  # Light Grey background
-    color: #000000;  # Black text
-}
-</style>
-"""
-
     st.markdown(sidebar_style, unsafe_allow_html=True)
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
     jtbd_df = pd.read_csv('jtbd.csv')
     role_df = pd.read_csv('role.csv')
     content_df = pd.read_csv('blog.csv')
-    
-  
-
 
     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
