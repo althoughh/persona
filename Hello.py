@@ -134,7 +134,11 @@ def show_content_ideas(content_ideas):
                 st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
             st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
-def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry):
+    # Initialize the selections with None
+    selected_role = None
+    selected_job = None
+
     # Check if an industry is selected to enable the Role dropdown
     if selected_industry:
         selected_role = st.sidebar.selectbox("Select a Role", list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()))
@@ -147,6 +151,7 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
     else:
         selected_job = st.sidebar.selectbox("Select a Job to be Done", [''], disabled=True)
 
+    return selected_role, selected_job
 
 def run():
     st.sidebar.success("Select some options.")
@@ -156,15 +161,15 @@ def run():
     role_df = pd.read_csv('role.csv')
     content_df = pd.read_csv('blog.csv')
 
-    # Sidebar Dropdowns
+     # Sidebar Dropdowns
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry']. unique()))
-    selected_role = st.sidebar.selectbox("Select a Role", [''] + list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else [])
-    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else [])
+    
+    # Call the function and get the selected role and job
+    selected_role, selected_job = display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry)
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
     # Display data based on selection
-    display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
     # Button in the sidebar for content ideas
     if st.sidebar.button("Get Content Ideas"):
