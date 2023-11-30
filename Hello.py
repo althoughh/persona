@@ -9,9 +9,6 @@ st.set_page_config(
     page_icon=im,
     layout="wide",
 )
-st.markdown(main_style, unsafe_allow_html=True)
-
-
 # Custom CSS for styling
 main_style = """
 <style>
@@ -60,6 +57,7 @@ group_headings = {
         "How Can We Serve Them": ["How Zinc Work Helps"]
     }
 }
+st.markdown(main_style, unsafe_allow_html=True)
 
 def get_content_ideas(df, selected_industry, selected_role):
     base_url = "https://zincwork.com/blog/"
