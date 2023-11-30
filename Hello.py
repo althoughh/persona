@@ -143,14 +143,13 @@ def run():
     jtbd_df = pd.read_csv('jtbd.csv')
     content_df = pd.read_csv('blog.csv')
 
-    # Sidebar Dropdowns
-    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
 
     role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else list(role_df['Role'].unique())
-    selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options)
+    selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options, key='select_role')
 
     job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else list(jtbd_df['Job Name'].unique())
-    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options)
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
