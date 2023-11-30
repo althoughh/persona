@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(layout="wide")  # Set the layout to 'wide'
+st.markdown(main_style, unsafe_allow_html=True)
 
 # Custom CSS for styling
 main_style = """
@@ -19,7 +20,6 @@ body {
 </style>
 """
 
-st.markdown(main_style, unsafe_allow_html=True)
 
 color_scheme = {
     "Overview": "#007bff",  # Example color
