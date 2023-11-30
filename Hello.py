@@ -145,35 +145,23 @@ def run():
 
     selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
 
-    role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else list(role_df['Role'].unique())
+    # Options for Role based on selected Industry
+    if selected_industry:
+        role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique())
+    else:
+        role_options = list(role_df['Role'].unique())
+
+    # Sidebar Dropdown for Role
     selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options, key='select_role')
 
-    job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else list(jtbd_df['Job Name'].unique())
-    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
-
-    st.markdown(sidebar_style, unsafe_allow_html=True)
-
-    # Display information based on industry selection
-    if selected_industry:
-        # Assume the display_info_with_cards function takes a dataframe, section, and selected_value
-        display_info_with_cards(industry_df, 'industry', selected_industry)
-
-    # Display information based on role selection
+    # Options for Job based on selected Role
     if selected_role:
-        display_info_with_cards(role_df, 'role', selected_role)
+        job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique())
+    else:
+        job_options = list(jtbd_df['Job Name'].unique())
 
-    # Display information based on job selection
-    if selected_job:
-        display_info_with_cards(jtbd_df, 'job', selected_job)
-
-    # Sidebar Dropdowns
-    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()))
-
-    role_options = list(role_df[role_df['Industry'] == selected_industry]['Role'].unique()) if selected_industry else list(role_df['Role'].unique())
-    selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options)
-
-    job_options = list(jtbd_df[jtbd_df['Mapped Role'] == selected_role]['Job Name'].unique()) if selected_role else list(jtbd_df['Job Name'].unique())
-    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options)
+    # Sidebar Dropdown for Job
+    selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
 
     st.markdown(sidebar_style, unsafe_allow_html=True)
 
