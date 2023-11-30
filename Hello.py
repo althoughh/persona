@@ -20,7 +20,7 @@ div[data-baseweb="select"] > div {
 /* The list of choices */
 li>span {
   color: #333 !important;
-  font-size: 35px;
+  font-size: 23px;
   background-color: #ffff !important;
 }
 
