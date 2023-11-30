@@ -2,6 +2,25 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(layout="wide")  # Set the layout to 'wide'
+
+# Custom CSS for styling
+main_style = """
+<style>
+body {
+    background-color: #ffffff;  # White background for the main page
+}
+
+.css-1lcbmhc {  # This class targets the sidebar
+    background-color: #808080;  # Grey background for the sidebar
+    color: #000000;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+</style>
+"""
+
+st.markdown(main_style, unsafe_allow_html=True)
+
 color_scheme = {
     "Overview": "#007bff",  # Example color
     "What Do They Need": "#28a745",
@@ -9,16 +28,7 @@ color_scheme = {
     "How Can We Serve Them": "#17a2b8"
 }
 
-sidebar_style = """
-<style>
-.css-1lcbmhc {  # This class targets the sidebar
-    background-color: #f1f1f1;  # Change to your desired background colour
-    color: #000000;  # Change text colour as needed
-    padding: 10px;  # Adjust padding if necessary
-    font-family: Arial, sans-serif;  # Choose your font
-}
-</style>
-"""
+
 
 
 # Define the group headings outside the functions to make it globally accessible
