@@ -171,7 +171,6 @@ def run():
         content_ideas = get_content_ideas(content_df, selected_industry, selected_role)
         show_content_ideas(content_ideas)
 
-
-
 if __name__ == "__main__":
     run()
+
