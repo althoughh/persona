@@ -117,7 +117,7 @@ def get_bootstrap_card_html(title, content, group, num_columns):
         <div style="width: {card_width}; margin: 2px; padding: 5px; 
                     border: 1px solid {card_color}; border-radius: 5px;
                     box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
-            <h4 style="color: {card_color}; margin-bottom: 0.5em;">{title}</h4>
+           <b> <p style="color: {card_color}; margin-bottom: 0.5em;">{title}</p></b>
             <p style="font-size: 0.9em;">{content}</p>
         </div>
     """
