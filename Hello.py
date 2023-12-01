@@ -1,39 +1,21 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-
+# Load the image for the page icon
 im = Image.open("logo.png")
+
+# Set Streamlit page configuration
 st.set_page_config(
     page_title="Hello",
     page_icon=im,
     layout="wide",
 )
 
-st.markdown("""
-<style>
-/* The input itself */
-div[data-baseweb="select"] > div {
-  background-color: #ffffff !important;
-  font-size: 23px !important;
-}
-
-/* The list of choices */
-li>span {
-  color: #333 !important;
-  font-size: 23px;
-  background-color: #ffff !important;
-}
-
-li {
-  background-color: #ffff !important;
-}
-</style>
-""", unsafe_allow_html=True)
-# Custom CSS for styling
+# Define custom styles for the main page and sidebar
 main_style = """
 <style>
 body {
-    background-color: #ffffff;  # White background for the main page
+    background-color: #ffffff; /* White background for the main page */
 }
 </style>
 """
@@ -41,18 +23,49 @@ body {
 sidebar_style = """
 <style>
 [data-testid="stSidebar"] {
-    background-color: #D3D3D3;  # Light grey background
-    color: #000000;  # Black text
+    background-color: #D3D3D3; /* Light grey background */
+    color: #000000; /* Black text */
 }
 </style>
 """
 
-color_scheme = {
-    "Overview": "#007bff",  # Example color
-    "What Do They Need": "#28a745",
-    "How Do They Choose": "#ffc107",
-    "How Can We Serve Them": "#17a2b8"
+# Apply main styles to the page
+st.markdown(main_style, unsafe_allow_html=True)
+
+# Define and apply custom styles for select input and list choices
+select_input_style = """
+<style>
+/* The input itself */
+div[data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    font-size: 16px !important;
 }
+
+/* The list of choices */
+li>span {
+    color: #333 !important;
+    font-size: 16px;
+    background-color: #ffff !important;
+}
+
+li {
+    background-color: #ffff !important;
+}
+</style>
+"""
+st.markdown(select_input_style, unsafe_allow_html=True)
+
+# Apply sidebar styles
+st.markdown(sidebar_style, unsafe_allow_html=True)
+
+# Define a color scheme dictionary
+color_scheme = {
+    "Overview": "#007bff",  # Blue
+    "What Do They Need": "#28a745",  # Green
+    "How Do They Choose": "#ffc107",  # Yellow
+    "How Can We Serve Them": "#17a2b8"  # Cyan
+}
+
 
 
 
