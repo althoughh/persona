@@ -92,9 +92,6 @@ group_headings = {
     }
 }
 
-
-st.markdown(main_style, unsafe_allow_html=True)
-
 def get_content_ideas(df, selected_industry, selected_role):
     base_url = "https://zincwork.com/blog/"
     if selected_industry:
@@ -175,8 +172,6 @@ def run():
 
     # Sidebar Dropdown for Job
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
-
-    st.markdown(sidebar_style, unsafe_allow_html=True)
 
 
     # Button in the sidebar for content ideas
