@@ -102,6 +102,16 @@ def get_content_ideas(df, selected_industry, selected_role):
     df['URL'] = base_url + df['Slug']
     return df[['Name', 'URL']]
 
+def show_content_ideas(content_ideas):
+    if content_ideas.empty:
+        st.sidebar.write("No content ideas available for the selected criteria.")
+    else:
+        with st.sidebar.container():
+            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px; margin-bottom: 10px;'>", unsafe_allow_html=True)
+            st.sidebar.write("Content Ideas:")
+            for index, row in content_ideas.iterrows():
+                st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
+
 def display_info_with_cards(df, section, selected_value):
     if not df.empty:
         display_title = f"{section.capitalize()}: {selected_value}" if selected_value else section.capitalize()
@@ -109,7 +119,6 @@ def display_info_with_cards(df, section, selected_value):
 
         for group, categories in group_headings[section].items():
             st.markdown(f"<h3>{group}</h3>", unsafe_allow_html=True)
-            
             num_columns = len(categories)
             columns_container = st.columns(num_columns)
 
@@ -133,16 +142,6 @@ def get_bootstrap_card_html(title, content, group, num_columns):
     """
 
 
-def show_content_ideas(content_ideas):
-    if content_ideas.empty:
-        st.sidebar.write("No content ideas available for the selected criteria.")
-    else:
-        with st.sidebar.container():
-            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px; margin-bottom: 10px;'>", unsafe_allow_html=True)
-            st.sidebar.write("Content Ideas:")
-            for index, row in content_ideas.iterrows():
-                st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
-            st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 
 def run():
@@ -153,7 +152,7 @@ def run():
     jtbd_df = pd.read_csv('jtbd.csv')
     content_df = pd.read_csv('blog.csv')
 
-    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
+      selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
 
     # Options for Role based on selected Industry
     if selected_industry:
@@ -161,7 +160,6 @@ def run():
     else:
         role_options = list(role_df['Role'].unique())
 
-    # Sidebar Dropdown for Role
     selected_role = st.sidebar.selectbox("Select a Role", [''] + role_options, key='select_role')
 
     # Options for Job based on selected Role
@@ -170,8 +168,13 @@ def run():
     else:
         job_options = list(jtbd_df['Job Name'].unique())
 
-    # Sidebar Dropdown for Job
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
+
+    # Display content based on selections
+    if selected_industry and selected_role and selected_job:
+        # Assume you have a function to filter data based on selections
+        filtered_data = filter_data(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
+        display_info_with_cards(filtered_data, "Section Name", selected_job)  # Modify with correct parameters
 
 
     # Button in the sidebar for content ideas
