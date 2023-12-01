@@ -152,7 +152,7 @@ def run():
     jtbd_df = pd.read_csv('jtbd.csv')
     content_df = pd.read_csv('blog.csv')
 
-      selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
+    selected_industry = st.sidebar.selectbox("Select an Industry", [''] + list(industry_df['Industry'].unique()), key='select_industry')
 
     # Options for Role based on selected Industry
     if selected_industry:
