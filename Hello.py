@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import gspread
+from google.oauth2 import service_account
 # Load the image for the page icon
 im = Image.open("logo.png")
 
@@ -11,23 +13,15 @@ st.set_page_config(
     layout="wide",
 )
 
-from streamlit_gsheets import GSheetsConnection
-
-# Create a connection object.
-conn = st.connection("gsheets", type=GSheetsConnection)
-
-df = conn.read()
-
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.name} has a :{row.pet}:")
-
-df = conn.read(
-    worksheet="Sheet1",
-    ttl="10m",
-    usecols=[0, 1],
-    nrows=3,
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"
+    ],
 )
+conn = connect(credentials=credentials)
+client=gspread.authorize(credentials)
+
 # Define custom styles for the main page and sidebar
 main_style = """
 <style>
@@ -85,8 +79,16 @@ color_scheme = {
 
 
 
+sheet_id = '1Bs-YF1pQIYvMMD8Gn7FKkAcqZvMcAgyN_g2cjvDI8Yw'
+csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+database_df = pd.read_csv(csv_url, on_bad_lines='skip')
 
 
+database_df = database_df.astype(str)
+sheet_url = st.secrets["private_gsheets_url"] #this information should be included in streamlit secret
+sheet = client.open_by_url(sheet_url).sheet1
+sheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
+st.success('Data has been written to Google Sheets')
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
     "industry": {
