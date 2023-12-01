@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-import streamlit_gsheets
 # Load the image for the page icon
 im = Image.open("logo.png")
 
