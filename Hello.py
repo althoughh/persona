@@ -3,6 +3,7 @@ import pandas as pd
 from PIL import Image
 import gspread
 from google.oauth2 import service_account
+
 # Load the image for the page icon
 im = Image.open("logo.png")
 
