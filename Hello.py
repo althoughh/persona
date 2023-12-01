@@ -141,7 +141,14 @@ def get_bootstrap_card_html(title, content, group, num_columns):
         </div>
     """
 
-
+def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job):
+    # Pass the selected value to display_info_with_cards
+    if selected_industry:
+        display_info_with_cards(industry_df[industry_df['Industry'] == selected_industry], "industry", selected_industry)
+    if selected_role:
+        display_info_with_cards(role_df[role_df['Role'] == selected_role], "role", selected_role)
+    if selected_job:
+        display_info_with_cards(jtbd_df[jtbd_df['Job Name'] == selected_job], "job", selected_job)
 
 
 def run():
@@ -170,11 +177,7 @@ def run():
 
     selected_job = st.sidebar.selectbox("Select a Job to be Done", [''] + job_options, key='select_job')
 
-    # Display content based on selections
-    if selected_industry and selected_role and selected_job:
-        # Assume you have a function to filter data based on selections
-        filtered_data = filter_data(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
-        display_info_with_cards(filtered_data, "Section Name", selected_job)  # Modify with correct parameters
+    display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_industry, selected_role, selected_job)
 
 
     # Button in the sidebar for content ideas
