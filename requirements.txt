@@ -2,8 +2,6 @@ altair
 numpy
 pandas
 pydeck
-streamlit-gsheets
 streamlit==1.28
-
 gspread
 
