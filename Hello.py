@@ -11,6 +11,16 @@ st.set_page_config(
     layout="wide",
 )
 
+from streamlit_gsheets import GSheetsConnection
+
+# Create a connection object.
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+df = conn.read()
+
+# Print results.
+for row in df.itertuples():
+    st.write(f"{row.name} has a :{row.pet}:")
 # Define custom styles for the main page and sidebar
 main_style = """
 <style>
