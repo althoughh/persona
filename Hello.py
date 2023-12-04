@@ -136,11 +136,10 @@ group_headings = {
 
 def get_content_ideas(content_df, selected_industry, selected_role):
     if selected_industry:
-        content_df =content_df[content_df[selected_industry]]
+        content_df = content_df[content_df['Industry'] == selected_industry]
     if selected_role:
-        content_df = content_df[content_df[selected_role]]
-    return content_df[['Name', 'slug']]
-
+        content_df = content_df[content_df['Role'] == selected_role]
+    return content_df[['Name', 'slug']]  # Assuming URL is the correct column
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
