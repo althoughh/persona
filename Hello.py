@@ -153,7 +153,7 @@ def show_content_ideas(content_ideas):
             st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px; margin-bottom: 10px;'>", unsafe_allow_html=True)
             st.sidebar.write("Content Ideas:")
             for index, row in content_ideas.iterrows():
-                st.sidebar.markdown(f"<a href='{row['URL']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<a href='{row['slug']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
 
 def display_info_with_cards(df, section, selected_value):
     if not df.empty:
