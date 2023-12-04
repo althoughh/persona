@@ -4,6 +4,8 @@ from PIL import Image
 
 # Load the image for the page icon
 im = Image.open("logo.png")
+st.sidebar.image("logo.png", use_column_width=True)
+
 
 # Set Streamlit page configuration
 st.set_page_config(
