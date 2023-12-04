@@ -64,50 +64,6 @@ color_scheme = {
 
 
 
-# Define custom styles for the main page and sidebar
-main_style = """
-<style>
-body {
-    background-color: #ffffff; /* White background for the main page */
-}
-</style>
-"""
-# Apply sidebar styles
-
-
-sidebar_style = """
-<style>
-[data-testid="stSidebar"] {
-    background-color: #D3D3D3; /* Light grey background */
-    color: #000000; /* Black text */
-}
-
-button[class^="st-bb"] {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-}
-</style>
-
-"""
-
-# Define a color scheme dictionary
-color_scheme = {
-    "Overview": "#007bff",  # Blue
-    "What Do They Need": "#28a745",  # Green
-    "How Do They Choose": "#ffc107",  # Yellow
-    "How Can We Serve Them": "#17a2b8"  # Cyan
-}
-
-
 # Define the group headings outside the functions to make it globally accessible
 group_headings = {
     "industry": {
