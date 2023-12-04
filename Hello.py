@@ -12,6 +12,57 @@ st.set_page_config(
     layout="wide",
 )
 
+def apply_custom_styles():
+    styles = """
+    <style>
+    body {
+        background-color: #ffffff; /* White background for the main page */
+    }
+    [data-testid="stSidebar"] {
+        background-color: #D3D3D3; /* Light grey background */
+        color: #000000; /* Black text */
+    }
+    button[class^="st-bb"] {
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        font-size: 16px !important;
+    }
+    li>span {
+        color: #333 !important;
+        font-size: 16px;
+        background-color: #ffff !important;
+    }
+    li {
+        background-color: #ffff !important;
+    }
+    </style>
+    """
+    st.markdown(styles, unsafe_allow_html=True)
+
+# Apply custom styles
+apply_custom_styles()
+
+# Define a color scheme dictionary
+color_scheme = {
+    "Overview": "#007bff",  # Blue
+    "What Do They Need": "#28a745",  # Green
+    "How Do They Choose": "#ffc107",  # Yellow
+    "How Can We Serve Them": "#17a2b8"  # Cyan
+}
+
+
 
 # Define custom styles for the main page and sidebar
 main_style = """
@@ -47,34 +98,6 @@ button[class^="st-bb"] {
 </style>
 
 """
-
-
-# Define and apply custom styles for select input and list choices
-select_input_style = """
-<style>
-/* The input itself */
-div[data-baseweb="select"] > div {
-    background-color: #ffffff !important;
-    font-size: 16px !important;
-}
-
-/* The list of choices */
-li>span {
-    color: #333 !important;
-    font-size: 16px;
-    background-color: #ffff !important;
-}
-
-li {
-    background-color: #ffff !important;
-}
-</style>
-"""
-
-# Apply main styles to the page
-st.markdown(main_style, unsafe_allow_html=True)
-st.markdown(sidebar_style, unsafe_allow_html=True)
-st.markdown(select_input_style, unsafe_allow_html=True)
 
 # Define a color scheme dictionary
 color_scheme = {
