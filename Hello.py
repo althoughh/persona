@@ -135,11 +135,15 @@ group_headings = {
 
 
 def get_content_ideas(content_df, selected_industry, selected_role):
-    if selected_industry:
-        content_df = content_df[content_df['Industry'] == selected_industry]
-    if selected_role:
-        content_df = content_df[content_df['Role'] == selected_role]
-    return content_df[['Name', 'slug']]  # Assuming URL is the correct column
+    filtered_df = content_df.copy()
+
+    if selected_industry and selected_industry in content_df.columns:
+        filtered_df = filtered_df[filtered_df[selected_industry] == True]
+
+    if selected_role and selected_role in content_df.columns:
+        filtered_df = filtered_df[filtered_df[selected_role] == True]
+
+    return filtered_df[['Name', 'slug']]
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
