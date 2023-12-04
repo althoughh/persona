@@ -21,9 +21,17 @@ body {
 }
 </style>
 """
-# Add custom styles for the sidebar button
-sidebar_style += """
+# Apply sidebar styles
+st.markdown(sidebar_style, unsafe_allow_html=True)
+
+
+sidebar_style = """
 <style>
+[data-testid="stSidebar"] {
+    background-color: #D3D3D3; /* Light grey background */
+    color: #000000; /* Black text */
+}
+
 button[class^="st-bb"] {
     background-color: #4CAF50; /* Green background */
     color: white; /* White text */
@@ -38,18 +46,7 @@ button[class^="st-bb"] {
     border-radius: 8px;
 }
 </style>
-"""
-# Apply sidebar styles
-st.markdown(sidebar_style, unsafe_allow_html=True)
 
-
-sidebar_style = """
-<style>
-[data-testid="stSidebar"] {
-    background-color: #D3D3D3; /* Light grey background */
-    color: #000000; /* Black text */
-}
-</style>
 """
 
 # Apply main styles to the page
