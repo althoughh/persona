@@ -139,7 +139,7 @@ def get_content_ideas(content_df, selected_industry, selected_role):
         content_df =content_df[content_df[selected_industry]]
     if selected_role:
         content_df = content_df[content_df[selected_role]]
-    return df[['Name', 'slug']]
+    return content_df[['Name', 'slug']]
 
 
 def show_content_ideas(content_ideas):
