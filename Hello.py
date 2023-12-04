@@ -22,7 +22,6 @@ body {
 </style>
 """
 # Apply sidebar styles
-st.markdown(sidebar_style, unsafe_allow_html=True)
 
 
 sidebar_style = """
@@ -49,8 +48,6 @@ button[class^="st-bb"] {
 
 """
 
-# Apply main styles to the page
-st.markdown(main_style, unsafe_allow_html=True)
 
 # Define and apply custom styles for select input and list choices
 select_input_style = """
@@ -73,10 +70,11 @@ li {
 }
 </style>
 """
-st.markdown(select_input_style, unsafe_allow_html=True)
 
-# Apply sidebar styles
+# Apply main styles to the page
+st.markdown(main_style, unsafe_allow_html=True)
 st.markdown(sidebar_style, unsafe_allow_html=True)
+st.markdown(select_input_style, unsafe_allow_html=True)
 
 # Define a color scheme dictionary
 color_scheme = {
