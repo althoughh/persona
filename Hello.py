@@ -136,9 +136,9 @@ group_headings = {
 
 def get_content_ideas(content_df, selected_industry, selected_role):
     if selected_industry:
-        df = df[df[selected_industry]]
+        content_df =content_df[content_df[selected_industry]]
     if selected_role:
-        df = df[df[selected_role]]
+        content_df = content_df[content_df[selected_role]]
     return df[['Name', 'slug']]
 
 
