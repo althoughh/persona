@@ -4,8 +4,7 @@ from PIL import Image
 
 # Load the image for the page icon
 im = Image.open("logo.png")
-with st.sidebar:
-      st.image("logo.png", width=150)
+
 
 # Set Streamlit page configuration
 st.set_page_config(
@@ -14,6 +13,8 @@ st.set_page_config(
     layout="wide",
 )
 
+with st.sidebar:
+      st.image("logo.png", width=150)
 def apply_custom_styles():
     styles = """
     <style>
