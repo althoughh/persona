@@ -131,15 +131,16 @@ group_headings = {
 }
 
 
-def get_content_ideas(content_df, selected_industry, selected_role):
-    # Filter the DataFrame based on the selected industry and role
-    if selected_industry and selected_industry in content_df.columns:
-        content_df = content_df[content_df[selected_industry] == 'true']
-    if selected_role and selected_role in content_df.columns:
-        content_df = content_df[content_df[selected_role] == 'true']
 
-    # Return only the Name and Slug columns from the filtered DataFrame
-    return content_df[['Name', 'Slug']]
+
+
+def get_content_ideas(content_df, selected_industry, selected_role):
+    if selected_industry:
+        df = df[df[selected_industry]]
+    if selected_role:
+        df = df[df[selected_role]]
+    return df[['Name', 'slug']]
+
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
