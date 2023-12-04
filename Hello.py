@@ -110,7 +110,6 @@ def show_content_ideas(content_ideas):
         st.sidebar.write("No content ideas available for the selected criteria.")
     else:
         with st.sidebar.container():
-            st.sidebar.markdown("<div style='border: 2px solid #4CAF50; padding: 10px; margin-bottom: 10px;'>", unsafe_allow_html=True)
             st.sidebar.write("Content Ideas:")
             for index, row in content_ideas.iterrows():
                 st.sidebar.markdown(f"<a href='{row['slug']}' target='_blank'>{row['Name']}</a>", unsafe_allow_html=True)
