@@ -112,15 +112,16 @@ group_headings = {
     }
 }
 
-def get_content_ideas(df, selected_industry, selected_role):
+def get_content_ideas(content_df, selected_industry, selected_role):
     base_url = "https://zincwork.com/blog/"
-    if selected_industry:
-        df = df[df[selected_industry]]
-    if selected_role:
-        df = df[df[selected_role]]
+    if selected_industry and selected_industry in content_df.columns:
+        content_df = content_df[content_df[selected_industry] == 'true']
+    if selected_role and selected_role in content_df.columns:
+        content_df = content_df[content_df[selected_role] == 'true']
 
-    df['URL'] = base_url + df['Slug']
-    return df[['Name', 'URL']]
+    content_df['URL'] = base_url + content_df['Slug']
+    return content_df[['Name', 'URL']]
+
 
 def show_content_ideas(content_ideas):
     if content_ideas.empty:
