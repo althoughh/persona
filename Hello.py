@@ -157,7 +157,7 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
 def run():
     st.sidebar.success("Select some options.")
     with st.sidebar:
-      st.image("https://github.com/althoughh/persona/blob/main/logo.png", width=150)
+      st.image("logo.png", width=150)
 
    
     industry_df = pd.read_csv('industry.csv')
