@@ -22,7 +22,7 @@ def apply_custom_styles():
         background-color: #D3D3D3; /* Light grey background */
         color: #000000; /* Black text */
     }
-    button[class^="st-bb"] {
+    button[class^="styles_terminalButton__JBj5T"] {
         background-color: #4CAF50; /* Green background */
         color: white; /* White text */
         border: none;
