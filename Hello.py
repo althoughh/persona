@@ -155,7 +155,7 @@ def display_data_based_on_selection(industry_df, role_df, jtbd_df, selected_indu
 
 
 def run():
-    st.sidebar.image("logo.png", use_column_width=True)
+    st.sidebar.image(im, use_column_width=True)
     st.sidebar.success("Select some options.")
     # Load the CSV files
     industry_df = pd.read_csv('industry.csv')
