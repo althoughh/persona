@@ -21,6 +21,27 @@ body {
 }
 </style>
 """
+# Add custom styles for the sidebar button
+sidebar_style += """
+<style>
+button[class^="st-bb"] {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+</style>
+"""
+# Apply sidebar styles
+st.markdown(sidebar_style, unsafe_allow_html=True)
+
 
 sidebar_style = """
 <style>
