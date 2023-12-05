@@ -57,6 +57,13 @@ def apply_custom_styles():
 # Apply custom styles
 apply_custom_styles()
 
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 # Define a color scheme dictionary
 color_scheme = {
     "Overview": "#007bff",  # Blue
